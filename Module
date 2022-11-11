@@ -1,0 +1,337 @@
+#include <iostream>
+#include <cstdlib>
+#include <cassert>
+class Schudule{
+public:
+    virtual ~Schudule(){};
+    virtual std::string concrete_schudle() const = 0;
+    std::string  assert1(){
+        return "Schudle is work";
+    }
+};
+class Schudule_1:public Schudule{
+public:
+    std::string concrete_schudle() const override{
+        return "KIEV-LUTSK"   ;
+    }
+};
+class Schudule_2:public Schudule{
+public:
+    std::string concrete_schudle() const override{
+        return "RIVNE-LVIV";
+    }
+};
+class Schudule_3:public Schudule{
+public:
+    std::string concrete_schudle() const override{
+        return "ODESA-KRAKOV";
+    }
+};
+
+
+
+class Station {
+ public:
+    virtual ~Station(){};
+    virtual std::string on_off_word_train() const = 0;
+    virtual int  buy_ticket() const = 0;
+    virtual std::string  pasagire_name_and_surname() const = 0;
+    virtual int id_pasagire()const = 0;
+    virtual std::string marchute1(const Schudule_1 &collaborator) const = 0;
+    virtual std::string marchute2(const Schudule_2 &collaborator) const = 0;
+    virtual std::string marchute3(const Schudule_3 &collaborator) const = 0;
+    std::string  assert1(){
+        return "Station is work";
+    }
+};
+class People_1 : public Station {
+ public:
+    int id_pasagire() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%100;
+        return k;
+    };
+    std::string pasagire_name_and_surname() const override{
+        return "Voievoda Vladislav";
+    }
+    std::string marchute1(const Schudule_1 &collaborator) const override{
+        Schudule_1 f ;
+        std::cout<<"Напрям : ";
+        std::string  k =  f.concrete_schudle();
+        return k;
+    };
+};
+
+class People_2 : public Station {
+ public:
+    int id_pasagire() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%100;
+        return k;
+    };
+    std::string pasagire_name_and_surname() const override{
+        return "ROMAN IVANOV";
+    }
+    std::string marchute2(const Schudule_2 &collaborator) const override{
+        Schudule_2 f ;
+        std::cout<<"Напрям : ";
+        std::string  k =  f.concrete_schudle();
+        return k;
+    };
+    
+    
+};
+class People_3 : public Station {
+ public:
+    int id_pasagire() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%100;
+        return k;
+    };
+    std::string pasagire_name_and_surname() const override{
+        return "OLGA NIFIKIROVNA";
+    }
+    std::string marchute3(const Schudule_3 &collaborator) const override{
+        Schudule_3 f ;
+        std::cout<<"Напрям : ";
+        std::string  k =  f.concrete_schudle();
+        return k;
+    };
+    
+    
+};
+class Train:public Station  {
+  /**
+   * Продукт B способен работать самостоятельно...
+   */
+ public:
+  virtual ~Train(){};
+    virtual int id_machinister()const = 0;
+  virtual std::string marchutes() const = 0;
+  virtual std::string kilkist_pasagirov() const = 0;
+    virtual std::string marka_machine() const = 0;
+    virtual std::string  machinister_name_and_surname() const = 0;
+    std::string  assert1(){
+        return "Train is work";
+    }
+};
+class machinist_1:public Train,public Station{
+public:
+    int id_machinister() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%100;
+        return k;
+    }
+    std::string machinister_name_and_surname() const override{
+        return "ALEX VOLNII";
+    };
+    std::string marchute1(const Schudule_1 &collaborator) const override{
+        Schudule_1 ff;
+        std::string  k =  ff.concrete_schudle();
+        return k;
+    }
+    std::string kilkist_pasagirov() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int kilkist = rand()%100;
+        return "number of passengers : "+kilkist;
+    };
+    std::string marka_machine() const override{
+        return "BMW";
+    }
+};
+
+class machinist_2:public Train,public Station{
+public:
+    int id_machinister() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%100;
+        return k;
+    }
+    std::string machinister_name_and_surname() const override{
+        return "OLEG GNATIK";
+    };
+    std::string marchute2(const Schudule_2 &collaborator) const override{
+        Schudule_2 ff;
+        std::string  k =  ff.concrete_schudle();
+        return k;
+    }
+    std::string marchute3(const Schudule_3 &collaborator) const override{
+        std::cout<<"----AND----";
+        Schudule_3 ff;
+        std::string  k =  ff.concrete_schudle();
+        return k;
+    }
+    std::string kilkist_pasagirov() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int kilkist = rand()%100;
+        return "number of passengers : "+kilkist;
+    };
+    std::string marka_machine() const override{
+        return "MERSEDES";
+    }
+};
+class Customer{
+public:
+    virtual std::string id()const = 0 ;
+    std::string assert1(){
+        return "Customer is work";
+    }
+};
+class Customer_1:public Customer,public People_1{
+    std::string id() const override{
+        Station::pasagire_name_and_surname();
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%10000;
+        return "id "+ k;
+    };
+    std::string assert1(){
+        return "Customer is work";
+    }
+};
+class Customer_2:public Customer,public People_2{
+    std::string id() const override{
+        Station::pasagire_name_and_surname();
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%10000;
+        return "id "+ k;
+    };
+};
+class Customer_3:public Customer,public People_3{
+    std::string id() const override{
+        Station::pasagire_name_and_surname();
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%10000;
+        return "id "+ k;
+    };
+};
+
+class Schudule_time:public Schudule{
+public:
+    void timerosklad(){
+        srand(static_cast<unsigned>(time(nullptr)));
+        Schudule_1 f;
+        Schudule_2 ff ;
+        Schudule_3 fff;
+        int hourse = rand()%23;
+        int minutes = rand()%60;
+        std::cout<<"TIME :"<<hourse <<":"<<minutes;
+        f.concrete_schudle();
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        int hourse_2 = rand()%23;
+        int minutes_2 = rand()%60;
+        std::cout<<"TIME :"<<hourse_2 <<":"<<minutes_2;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        int hourse_3 = rand()%23;
+        int minutes_3 = rand()%60;
+        std::cout<<"TIME :"<<hourse_3 <<":"<<minutes_3;
+};
+};
+class Route:Schudule{
+public:
+    virtual std::string funch_1()const = 0;
+    virtual int long_funch2()const = 0;
+    virtual int time_funch3()const = 0 ;
+    std::string assert1(){
+        return "Route is work";
+    }
+};
+
+class Route_1:Route{
+public:
+
+    std::string funch_1() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        Schudule_1 f ;
+        f.concrete_schudle();
+        return "ZITHOMIR";
+    };
+    int long_funch2() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int long_times = rand()%400;
+        return long_times;
+    };
+    int time_funch3() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%400/2;
+        return k;
+    }
+    
+};
+class Route_2:Route{
+public:
+
+    std::string funch_1() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        Schudule_2 f ;
+        f.concrete_schudle();
+        return "ZDOLBYNIV";
+    };
+    int long_funch2() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int long_times = rand()%200;
+        return long_times;
+    };
+    int time_funch3() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%200/2;
+        return k;
+    }
+    
+};
+class Route_3:Route{
+public:
+
+    std::string funch_1() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        Schudule_3 f ;
+        f.concrete_schudle();
+        return "LVIV";
+    };
+    int long_funch2() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int long_times = rand()%350;
+        return long_times;
+    };
+    int time_funch3() const override{
+        srand(static_cast<unsigned>(time(nullptr)));
+        int k = rand()%350/2;
+        return k;
+    }
+};
+
+
+
+class UnitTest:public Customer,public Train,public Route,public Schudule , public Station{
+public:
+    void Testing1(){
+        Train* d ;
+        std::string c = d->assert1();
+        std::cout<<std::endl;
+    };
+    void Testing2(){
+        Customer* d ;
+        std::string c = d->assert1();
+        std::cout<<std::endl;
+    };
+    void Testing3(){
+        Route* d ;
+        std::string c = d->assert1();
+        std::cout<<std::endl;
+    };
+    void Testing4(){
+        Schudule* d ;
+        std::string c = d->assert1();
+        std::cout<<std::endl;
+    };
+    void Testing5(){
+        Station* d ;
+        std::string c = d->assert1();
+        std::cout<<std::endl;
+    };
+};
+
+
+
+int main(){};
